@@ -68,7 +68,7 @@ export function ProductPreview() {
           </div>
 
           {/* Main vehicle cards grid */}
-          <div className="grid gap-6 md:grid-cols-3 relative">
+          <div className="grid gap-6 md:grid-cols-3 relative pt-8">
             {vehicles.map((vehicle, index) => (
               <Card 
                 key={index}
@@ -78,13 +78,13 @@ export function ProductPreview() {
                     : ""
                 }`}
               >
-                {/* Vehicle image container */}
-                <div className="relative">
-                  <div className="overflow-hidden">
+                {/* Vehicle image container - pops out of card */}
+                <div className="relative -mt-8 mx-4">
+                  <div className="rounded-xl overflow-hidden">
                     <img 
                       src={vehicle.image} 
                       alt={vehicle.name} 
-                      className="w-full h-40 object-cover object-center transform hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   {vehicle.featured && (
