@@ -55,7 +55,7 @@ export function ProductPreview() {
         {/* Dashboard Mockup */}
         <div className="relative mx-auto max-w-5xl">
           {/* Floating notification - top left */}
-          <div className="absolute -left-4 top-8 z-20 animate-fade-in hidden md:block" style={{ animationDelay: "0.3s" }}>
+          <div className="absolute -left-4 -top-4 z-20 animate-fade-in hidden md:block" style={{ animationDelay: "0.3s" }}>
             <Card className="glass-card p-3 shadow-xl flex items-center gap-3">
               <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
                 <MessageSquare className="h-5 w-5 text-primary" />
