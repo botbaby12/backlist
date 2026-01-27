@@ -1,32 +1,28 @@
 import { Card, CardContent } from "@/components/ui/card";
+import logoFacebook from "@/assets/logo-facebook.png";
+import logoCraigslist from "@/assets/logo-craigslist.png";
+import logoAutotrader from "@/assets/logo-autotrader.png";
+import logoCarscom from "@/assets/logo-carscom.png";
 
 const sources = [
   { 
     name: "Facebook Marketplace", 
-    icon: "f",
-    bgColor: "bg-blue-600",
-    textColor: "text-white",
+    logo: logoFacebook,
     description: "Private party listings"
   },
   { 
     name: "Craigslist", 
-    icon: "CL",
-    bgColor: "bg-purple-600",
-    textColor: "text-white",
+    logo: logoCraigslist,
     description: "Local classifieds"
   },
   { 
     name: "Autotrader", 
-    icon: "AT",
-    bgColor: "bg-orange-500",
-    textColor: "text-white",
+    logo: logoAutotrader,
     description: "Private sellers"
   },
   { 
     name: "Cars.com", 
-    icon: "C",
-    bgColor: "bg-emerald-600",
-    textColor: "text-white",
+    logo: logoCarscom,
     description: "Owner listings"
   },
 ];
@@ -45,10 +41,12 @@ export function DataSources() {
           {sources.map((source) => (
             <Card key={source.name} className="hover-lift border-2 group cursor-pointer">
               <CardContent className="flex flex-col items-center p-6">
-                <div className={`h-16 w-16 rounded-2xl ${source.bgColor} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <span className={`text-2xl font-bold ${source.textColor}`}>
-                    {source.icon}
-                  </span>
+                <div className="h-16 w-16 rounded-2xl bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden p-2">
+                  <img 
+                    src={source.logo} 
+                    alt={`${source.name} logo`}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <h3 className="mt-4 font-semibold text-center">{source.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{source.description}</p>
