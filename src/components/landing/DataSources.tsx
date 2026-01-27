@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import logoFacebook from "@/assets/logo-facebook.png";
 import logoCraigslist from "@/assets/logo-craigslist.png";
 import logoAutotrader from "@/assets/logo-autotrader.png";
-import logoCarscom from "@/assets/logo-carscom.jpg";
+import logoCarscom from "@/assets/logo-carscom.png";
 
 const sources = [
   { 
