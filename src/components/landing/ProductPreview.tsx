@@ -1,6 +1,9 @@
 import { MessageSquare, TrendingUp, Clock, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import hondaAccord from "@/assets/car-honda-accord.png";
+import toyotaTacoma from "@/assets/car-toyota-tacoma.png";
+import fordExplorer from "@/assets/car-ford-explorer.png";
 
 export function ProductPreview() {
   return (
@@ -34,9 +37,9 @@ export function ProductPreview() {
           <div className="grid gap-6 md:grid-cols-3 relative">
             {/* Card 1 */}
             <Card className="hover-lift overflow-hidden bg-card border-2">
-              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=600&h=450&fit=crop&q=80" 
+                  src={hondaAccord} 
                   alt="2022 Honda Accord Sport" 
                   className="w-full h-full object-cover"
                 />
@@ -59,9 +62,9 @@ export function ProductPreview() {
 
             {/* Card 2 - Featured/Larger */}
             <Card className="hover-lift overflow-hidden bg-card border-2 border-primary/30 md:scale-105 md:-mt-4 md:mb-4 shadow-xl z-10">
-              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=600&h=450&fit=crop&q=80" 
+                  src={toyotaTacoma} 
                   alt="2021 Toyota Tacoma TRD" 
                   className="w-full h-full object-cover"
                 />
@@ -94,9 +97,9 @@ export function ProductPreview() {
 
             {/* Card 3 */}
             <Card className="hover-lift overflow-hidden bg-card border-2">
-              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=450&fit=crop&q=80" 
+                  src={fordExplorer} 
                   alt="2020 Ford Explorer XLT" 
                   className="w-full h-full object-cover"
                 />
