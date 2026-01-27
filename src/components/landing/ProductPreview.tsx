@@ -34,8 +34,12 @@ export function ProductPreview() {
           <div className="grid gap-6 md:grid-cols-3 relative">
             {/* Card 1 */}
             <Card className="hover-lift overflow-hidden bg-card border-2">
-              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center">
-                <div className="text-6xl">🚗</div>
+              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=600&h=450&fit=crop&q=80" 
+                  alt="2022 Honda Accord Sport" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="p-4">
                 <p className="text-primary font-semibold">2022 Honda Accord Sport</p>
@@ -55,8 +59,12 @@ export function ProductPreview() {
 
             {/* Card 2 - Featured/Larger */}
             <Card className="hover-lift overflow-hidden bg-card border-2 border-primary/30 md:scale-105 md:-mt-4 md:mb-4 shadow-xl z-10">
-              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center relative">
-                <div className="text-7xl">🛻</div>
+              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=600&h=450&fit=crop&q=80" 
+                  alt="2021 Toyota Tacoma TRD" 
+                  className="w-full h-full object-cover"
+                />
                 <Badge className="absolute top-3 right-3 bg-green-500 text-white">
                   <TrendingUp className="h-3 w-3 mr-1" />
                   Under Market
@@ -86,8 +94,12 @@ export function ProductPreview() {
 
             {/* Card 3 */}
             <Card className="hover-lift overflow-hidden bg-card border-2">
-              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center">
-                <div className="text-6xl">🚙</div>
+              <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=450&fit=crop&q=80" 
+                  alt="2020 Ford Explorer XLT" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="p-4">
                 <p className="text-primary font-semibold">2020 Ford Explorer XLT</p>
