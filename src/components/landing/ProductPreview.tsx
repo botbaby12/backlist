@@ -121,9 +121,9 @@ export function ProductPreview() {
             </Card>
           </div>
 
-          {/* Floating chat bubble - bottom right */}
-          <div className="absolute -right-4 bottom-16 z-20 animate-fade-in hidden md:block" style={{ animationDelay: "0.5s" }}>
-            <Card className="glass-card p-4 shadow-xl max-w-xs">
+          {/* Floating chat bubble - below cards, centered */}
+          <div className="mt-8 flex justify-center animate-fade-in" style={{ animationDelay: "0.5s" }}>
+            <Card className="glass-card p-4 shadow-xl max-w-sm animate-[float_3s_ease-in-out_infinite]">
               <div className="flex gap-3">
                 <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
                   <span className="text-sm">👤</span>
