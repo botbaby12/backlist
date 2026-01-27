@@ -80,11 +80,11 @@ export function ProductPreview() {
               >
                 {/* Vehicle image container - pops out of card */}
                 <div className="relative -mt-8 mx-4">
-                  <div className="bg-muted/50 rounded-xl overflow-hidden">
+                  <div className="rounded-xl overflow-hidden">
                     <img 
                       src={vehicle.image} 
                       alt={vehicle.name} 
-                      className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   {vehicle.featured && (
