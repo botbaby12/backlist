@@ -1,4 +1,4 @@
-import { Search, Bell, ShoppingCart } from "lucide-react";
+import { Search, Bell, CircleDot } from "lucide-react";
 
 const steps = [
   {
@@ -12,7 +12,7 @@ const steps = [
     description: "Get instant notifications when vehicles matching your criteria hit the market—before your competition sees them.",
   },
   {
-    icon: ShoppingCart,
+    icon: CircleDot,
     title: "Acquire",
     description: "Connect directly with sellers and close deals faster, without auction fees eating into your margins.",
   },
