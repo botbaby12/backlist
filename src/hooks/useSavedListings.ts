@@ -1,20 +1,28 @@
 import { useState, useEffect, useCallback } from 'react';
+import { storage } from '@/lib/storage';
 
 const STORAGE_KEY = 'backlist_saved_listings';
 
 export function useSavedListings() {
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
+    const loadSaved = async () => {
       try {
-        const parsed = JSON.parse(stored);
-        setSavedIds(new Set(parsed));
+        const stored = await storage.get(STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setSavedIds(new Set(parsed));
+        }
       } catch (e) {
-        console.error('Error parsing saved listings:', e);
+        console.error('Error loading saved listings:', e);
+      } finally {
+        setIsLoading(false);
       }
-    }
+    };
+
+    loadSaved();
   }, []);
 
   const toggleSaved = useCallback((listingId: string) => {
@@ -25,12 +33,13 @@ export function useSavedListings() {
       } else {
         next.add(listingId);
       }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]));
+      // Save asynchronously
+      storage.set(STORAGE_KEY, JSON.stringify([...next])).catch(console.error);
       return next;
     });
   }, []);
 
   const isSaved = useCallback((listingId: string) => savedIds.has(listingId), [savedIds]);
 
-  return { savedIds, toggleSaved, isSaved };
+  return { savedIds, toggleSaved, isSaved, isLoading };
 }

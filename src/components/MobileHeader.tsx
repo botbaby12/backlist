@@ -12,7 +12,7 @@ export function MobileHeader({ searchQuery, onSearchChange }: MobileHeaderProps)
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
-    <header className="md:hidden flex items-center gap-3 p-4 bg-card border-b border-border sticky top-0 z-40">
+    <header className="md:hidden flex items-center gap-3 p-4 pt-[max(1rem,env(safe-area-inset-top))] bg-card border-b border-border sticky top-0 z-40">
       {isSearchOpen ? (
         <>
           <Input
