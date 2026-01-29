@@ -32,11 +32,18 @@ const Index = () => {
           <div className="flex items-center justify-center py-16">
             <p className="text-muted-foreground">Loading listings...</p>
           </div>
+        ) : error ? (
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <p className="text-destructive text-lg mb-2">Failed to load listings</p>
+            <p className="text-muted-foreground text-sm">
+              {listings && listings.length === 0 ? 'Showing sample data instead' : 'Please try again later'}
+            </p>
+          </div>
         ) : (
-          <ListingsGrid 
-            listings={displayListings} 
-            savedIds={savedIds} 
-            onToggleSave={toggleSaved} 
+          <ListingsGrid
+            listings={displayListings}
+            savedIds={savedIds}
+            onToggleSave={toggleSaved}
           />
         )}
       </div>

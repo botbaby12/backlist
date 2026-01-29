@@ -11,19 +11,19 @@ interface AppLayoutProps {
 
 export function AppLayout({ children, searchQuery = '', onSearchChange }: AppLayoutProps) {
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-screen bg-background overflow-hidden">
       <DesktopSidebar />
-      
-      <div className="flex-1 flex flex-col">
-        <MobileHeader 
-          searchQuery={searchQuery} 
-          onSearchChange={onSearchChange || (() => {})} 
+
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
+        <MobileHeader
+          searchQuery={searchQuery}
+          onSearchChange={onSearchChange || (() => {})}
         />
-        
-        <main className="flex-1 pb-20 md:pb-0">
+
+        <main className="flex-1 overflow-y-auto overflow-x-hidden pb-20 md:pb-0 -webkit-overflow-scrolling-touch">
           {children}
         </main>
-        
+
         <MobileBottomNav />
       </div>
     </div>

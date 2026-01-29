@@ -41,7 +41,10 @@ export async function initializeCapacitor(): Promise<void> {
 
     // Handle app state changes (background/foreground)
     App.addListener('appStateChange', ({ isActive }) => {
-      console.log('App state changed. Is active:', isActive);
+      // App state tracking - isActive indicates if app is in foreground
+      if (import.meta.env.DEV) {
+        console.log('App state changed. Is active:', isActive);
+      }
     });
 
     // Hide splash screen after app is ready
