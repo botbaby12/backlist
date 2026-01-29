@@ -2,16 +2,21 @@ import { useState } from 'react';
 import { AppLayout } from '@/components/AppLayout';
 import { ListingsGrid } from '@/components/ListingsGrid';
 import { SearchBar } from '@/components/SearchBar';
-import { mockListings } from '@/data/mockListings';
+import { useListings } from '@/hooks/useListings';
 import { useSavedListings } from '@/hooks/useSavedListings';
+import { mockListings } from '@/data/mockListings';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { savedIds, toggleSaved } = useSavedListings();
+  const { data: listings, isLoading, error } = useListings(searchQuery);
 
-  const filteredListings = mockListings.filter((listing) =>
-    listing.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Fallback to mock data if no listings in DB yet
+  const displayListings = listings && listings.length > 0 
+    ? listings 
+    : mockListings.filter((listing) =>
+        listing.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
   return (
     <AppLayout searchQuery={searchQuery} onSearchChange={setSearchQuery}>
@@ -23,11 +28,17 @@ const Index = () => {
 
       {/* Listings grid */}
       <div className="p-4 md:p-6">
-        <ListingsGrid 
-          listings={filteredListings} 
-          savedIds={savedIds} 
-          onToggleSave={toggleSaved} 
-        />
+        {isLoading ? (
+          <div className="flex items-center justify-center py-16">
+            <p className="text-muted-foreground">Loading listings...</p>
+          </div>
+        ) : (
+          <ListingsGrid 
+            listings={displayListings} 
+            savedIds={savedIds} 
+            onToggleSave={toggleSaved} 
+          />
+        )}
       </div>
     </AppLayout>
   );

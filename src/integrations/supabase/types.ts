@@ -14,7 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      listings: {
+        Row: {
+          created_at: string
+          deal_grade: string
+          distance: string | null
+          estimated_value: number
+          id: string
+          image_url: string | null
+          location: string
+          mileage: number
+          original_url: string
+          posted_date: string | null
+          price: number
+          source: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          deal_grade: string
+          distance?: string | null
+          estimated_value: number
+          id?: string
+          image_url?: string | null
+          location: string
+          mileage: number
+          original_url: string
+          posted_date?: string | null
+          price: number
+          source: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          deal_grade?: string
+          distance?: string | null
+          estimated_value?: number
+          id?: string
+          image_url?: string | null
+          location?: string
+          mileage?: number
+          original_url?: string
+          posted_date?: string | null
+          price?: number
+          source?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      saved_listings: {
+        Row: {
+          created_at: string
+          id: string
+          listing_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          listing_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          listing_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_listings_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
