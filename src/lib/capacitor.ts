@@ -3,6 +3,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Keyboard } from '@capacitor/keyboard';
 import { App } from '@capacitor/app';
+import { initializePushNotifications } from './notifications';
 
 /**
  * Initialize Capacitor plugins for native platforms.
@@ -46,6 +47,9 @@ export async function initializeCapacitor(): Promise<void> {
         console.log('App state changed. Is active:', isActive);
       }
     });
+
+    // Initialize push notifications
+    await initializePushNotifications();
 
     // Hide splash screen after app is ready
     await SplashScreen.hide();
