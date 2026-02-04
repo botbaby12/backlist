@@ -13,6 +13,21 @@ interface ListingCardProps {
   onToggleSave: (id: string) => void;
 }
 
+// Stock car photos for when no image is available
+const STOCK_PHOTOS = [
+  'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=400&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1542362567-b07e54358753?w=400&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=300&fit=crop',
+];
+
+// Get a consistent stock photo based on listing id
+function getStockPhoto(id: string): string {
+  const hash = id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return STOCK_PHOTOS[hash % STOCK_PHOTOS.length];
+}
+
 export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps) {
   const formatPrice = (price: number) => 
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(price);
@@ -20,14 +35,30 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
   const formatMileage = (mileage: number) =>
     new Intl.NumberFormat('en-US').format(mileage) + 'k mi';
 
+  const hasImage = listing.imageUrl && listing.imageUrl.trim() !== '';
+  const displayImage = hasImage ? listing.imageUrl : getStockPhoto(listing.id);
+
+  const handleCardClick = () => {
+    if (listing.originalUrl) {
+      window.open(listing.originalUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
-    <Card className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-card">
+    <Card 
+      className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 bg-card cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="relative">
         <AspectRatio ratio={4 / 3}>
           <img
-            src={listing.imageUrl}
+            src={displayImage}
             alt={listing.title}
             className="object-cover w-full h-full"
+            onError={(e) => {
+              // Fallback to stock photo if image fails to load
+              e.currentTarget.src = getStockPhoto(listing.id);
+            }}
           />
         </AspectRatio>
         
@@ -36,8 +67,8 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
           <SourceIcon source={listing.source} className="text-[8px] md:text-[10px] px-1 md:px-1.5 py-0.5" />
         </div>
         
-        {/* Deal badge */}
-        <div className="absolute bottom-10 left-1.5 md:top-2 md:right-2 md:bottom-auto md:left-auto">
+        {/* Deal badge - Shows the deal rating (steal/great/good/fair/pass) - Bottom left */}
+        <div className="absolute bottom-2 left-1.5 md:bottom-2 md:left-2">
           <DealBadge grade={listing.dealGrade} className="text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5" />
         </div>
         
@@ -50,7 +81,7 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
             'transition-all duration-200'
           )}
           onClick={(e) => {
-            e.preventDefault();
+            e.stopPropagation(); // Prevent card click
             onToggleSave(listing.id);
           }}
         >
@@ -71,7 +102,7 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
         <div className="flex items-center gap-2 text-[11px] text-muted-foreground mb-2">
           <span className="flex items-center gap-0.5">
             <MapPin className="h-3 w-3" />
-            {listing.distance}
+            {listing.location || listing.distance || 'Unknown'}
           </span>
           <span className="flex items-center gap-0.5">
             <Gauge className="h-3 w-3" />
@@ -83,10 +114,12 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
           <p className="text-base font-bold text-foreground">
             {formatPrice(listing.price)}
           </p>
-          <p className="text-xs text-muted-foreground flex items-center gap-1">
-            <Sparkles className="h-3 w-3 text-amber-500" />
-            Est. {formatPrice(listing.estimatedValue)}
-          </p>
+          {listing.estimatedValue > 0 && (
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <Sparkles className="h-3 w-3 text-amber-500" />
+              Est. {formatPrice(listing.estimatedValue)}
+            </p>
+          )}
         </div>
       </CardContent>
     </Card>
