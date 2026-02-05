@@ -2,28 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Backlist - Car Deal Alerts</title>
-    <meta name="description" content="Real-time car deal alerts. Find underpriced vehicles before anyone else." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#000000" />
+
+    <title>Backlist</title>
+    <meta name="description" content="Find the best deals on pre-owned luxury items" />
     <meta name="author" content="Backlist" />
 
-    <!-- Open Graph / Facebook / iMessage -->
-    <meta property="og:title" content="Backlist - Car Deal Alerts" />
-    <meta property="og:description" content="Real-time car deal alerts. Find underpriced vehicles before anyone else." />
+    <meta property="og:title" content="Backlist" />
+    <meta property="og:description" content="Find the best deals on pre-owned luxury items" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://backlist.io" />
-    <meta property="og:image" content="https://backlist.io/og-image.png" />
-    <meta property="og:site_name" content="Backlist" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@backlist" />
-    <meta name="twitter:title" content="Backlist - Car Deal Alerts" />
-    <meta name="twitter:description" content="Real-time car deal alerts. Find underpriced vehicles before anyone else." />
-    <meta name="twitter:image" content="https://backlist.io/og-image.png" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <!-- iOS splash screens and icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+    <style>
+      /* Safe area CSS variables for notched devices */
+      :root {
+        --sat: env(safe-area-inset-top, 0px);
+        --sab: env(safe-area-inset-bottom, 0px);
+        --sal: env(safe-area-inset-left, 0px);
+        --sar: env(safe-area-inset-right, 0px);
+      }
+
+      /* Prevent rubber-banding on iOS */
+      html, body {
+        overscroll-behavior: none;
+      }
+
+      /* Ensure root element fills the screen */
+      #root {
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+    </style>
   </head>
 
   <body>

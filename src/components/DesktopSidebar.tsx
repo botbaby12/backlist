@@ -1,25 +1,15 @@
-import { useNavigate } from 'react-router-dom';
 import { NavLink } from '@/components/NavLink';
-import { List, Heart, Bell, HelpCircle, LogOut } from 'lucide-react';
+import { List, Heart, HelpCircle, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/contexts/AuthContext';
 
 const navItems = [
-  { to: '/dashboard', label: 'Listings', icon: List },
-  { to: '/dashboard/alerts', label: 'Alerts', icon: Bell },
-  { to: '/dashboard/saved', label: 'Saved', icon: Heart },
+  { to: '/', label: 'Listings', icon: List },
+  { to: '/saved', label: 'Saved', icon: Heart },
+  { to: '/help', label: 'Help Center', icon: HelpCircle },
 ];
 
 export function DesktopSidebar() {
-  const { signOut } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    signOut();
-    navigate('/');
-  };
-
   return (
     <aside className="hidden md:flex flex-col w-64 bg-card border-r border-border h-screen sticky top-0">
       {/* Logo */}
@@ -36,7 +26,7 @@ export function DesktopSidebar() {
             <li key={item.to}>
               <NavLink
                 to={item.to}
-                end={item.to === '/dashboard'}
+                end={item.to === '/'}
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground',
                   'hover:bg-accent hover:text-accent-foreground transition-colors'
@@ -56,7 +46,6 @@ export function DesktopSidebar() {
         <Button
           variant="ghost"
           className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground"
-          onClick={handleLogout}
         >
           <LogOut className="h-5 w-5" />
           Logout

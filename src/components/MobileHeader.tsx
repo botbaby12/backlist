@@ -2,17 +2,26 @@ import { useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { FilterButton } from './FilterBar';
+import { ListingFilters } from '@/types/filters';
 
 interface MobileHeaderProps {
   searchQuery: string;
   onSearchChange: (value: string) => void;
+  filters?: ListingFilters;
+  onOpenFilters?: () => void;
 }
 
-export function MobileHeader({ searchQuery, onSearchChange }: MobileHeaderProps) {
+export function MobileHeader({
+  searchQuery,
+  onSearchChange,
+  filters,
+  onOpenFilters,
+}: MobileHeaderProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
-    <header className="md:hidden flex items-center gap-3 p-4 bg-card border-b border-border sticky top-0 z-40">
+    <header className="md:hidden flex items-center gap-3 p-4 pt-[max(1rem,env(safe-area-inset-top))] bg-card border-b border-border sticky top-0 z-40">
       {isSearchOpen ? (
         <>
           <Input
@@ -23,9 +32,9 @@ export function MobileHeader({ searchQuery, onSearchChange }: MobileHeaderProps)
             className="flex-1"
             autoFocus
           />
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => {
               setIsSearchOpen(false);
               onSearchChange('');
@@ -39,14 +48,17 @@ export function MobileHeader({ searchQuery, onSearchChange }: MobileHeaderProps)
           <h1 className="text-xl font-bold text-foreground tracking-tight flex-1">
             Backlist
           </h1>
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="text-muted-foreground"
             onClick={() => setIsSearchOpen(true)}
           >
             <Search className="h-5 w-5" />
           </Button>
+          {filters && onOpenFilters && (
+            <FilterButton filters={filters} onClick={onOpenFilters} />
+          )}
         </>
       )}
     </header>
