@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Bell,
   Layers,
@@ -16,9 +15,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Layout } from "@/components/Layout";
-import { DemoFormModal } from "@/components/DemoFormModal";
+import { useCalendly } from "@/hooks/useCalendly";
 import hondaAccord from "@/assets/car-honda-accord.png";
 import fordExplorer from "@/assets/car-ford-explorer.png";
+
+const CALENDLY_URL = "https://calendly.com/bennett-english/backlist-io-demo";
 
 const features = [
   {
@@ -72,7 +73,7 @@ const values = [
 ];
 
 const Features = () => {
-  const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const { openCalendly } = useCalendly();
 
   return (
     <Layout>
@@ -243,15 +244,13 @@ const Features = () => {
               size="lg"
               variant="secondary"
               className="mt-8 gap-2"
-              onClick={() => setDemoModalOpen(true)}
+              onClick={() => openCalendly(CALENDLY_URL)}
             >
               Get a Demo <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
-
-      <DemoFormModal open={demoModalOpen} onOpenChange={setDemoModalOpen} />
     </Layout>
   );
 };
