@@ -42,6 +42,7 @@ export const mockListings: Listing[] = [
     imageUrl: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400&h=300&fit=crop',
     originalUrl: 'https://cars.com/example3',
     dealGrade: 'steal',
+    transmission: 'manual',
   },
   {
     id: '4',
@@ -56,6 +57,7 @@ export const mockListings: Listing[] = [
     imageUrl: 'https://images.unsplash.com/photo-1584345604476-8ec5f82d718c?w=400&h=300&fit=crop',
     originalUrl: 'https://autotrader.com/example4',
     dealGrade: 'pass',
+    transmission: 'manual',
   },
   {
     id: '5',

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { SourceIcon } from './SourceIcon';
 import { DealBadge } from './DealBadge';
+import { ManualTransmissionIcon } from './ManualTransmissionIcon';
 import { Listing } from '@/types/listing';
 import { cn } from '@/lib/utils';
 
@@ -66,13 +67,6 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
           <SourceIcon source={listing.source} className="text-[8px] md:text-[10px] px-1 md:px-1.5 py-0.5" />
         </div>
         
-        {/* Deal badge - only show if dealGrade exists */}
-        {listing.dealGrade && (
-          <div className="absolute bottom-10 left-1.5 md:top-2 md:right-2 md:bottom-auto md:left-auto">
-            <DealBadge grade={listing.dealGrade} className="text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5" />
-          </div>
-        )}
-        
         {/* Save button */}
         <Button
           variant="ghost"
@@ -111,16 +105,28 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
           </span>
         </div>
 
-        <div>
-          <p className="text-base font-bold text-foreground">
-            {formatPrice(listing.price)}
-          </p>
-          {listing.estimatedValue > 0 && (
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
-              <Sparkles className="h-3 w-3 text-amber-500" />
-              Est. {formatPrice(listing.estimatedValue)}
+        <div className="flex items-end justify-between">
+          <div>
+            <p className="text-base font-bold text-foreground">
+              {formatPrice(listing.price)}
             </p>
-          )}
+            {listing.estimatedValue > 0 && (
+              <p className="text-xs text-muted-foreground flex items-center gap-1">
+                <Sparkles className="h-3 w-3 text-amber-500" />
+                Est. {formatPrice(listing.estimatedValue)}
+              </p>
+            )}
+          </div>
+          <div className="flex items-center gap-1.5">
+            {listing.transmission === 'manual' && (
+              <span title="Manual Transmission" className="text-muted-foreground">
+                <ManualTransmissionIcon className="h-5 w-5" />
+              </span>
+            )}
+            {listing.dealGrade && (
+              <DealBadge grade={listing.dealGrade} className="text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5" />
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>
