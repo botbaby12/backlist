@@ -28,7 +28,7 @@ export function useAlerts() {
             location: [alert.city, alert.state].filter(Boolean).join(', ') || 'Unknown',
             distance: '',
             postedDate: alert.createdAt,
-            source: alert.url?.includes('autotrader') ? 'autotrader' : 'carscom',
+            source: alert.source || (alert.url?.includes('facebook') ? 'facebook' : alert.url?.includes('craigslist') ? 'craigslist' : alert.url?.includes('autotrader') ? 'autotrader' : 'carscom'),
             imageUrl: '',
             originalUrl: alert.url,
             dealGrade: alert.margin >= 15 ? 'steal' : 'pass',

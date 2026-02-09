@@ -21,8 +21,10 @@ const dealGrades: { value: DealGrade; label: string; color: string }[] = [
 ];
 
 const sources: { value: ListingSource; label: string }[] = [
+  { value: 'facebook', label: 'FB Marketplace' },
   { value: 'autotrader', label: 'AutoTrader' },
   { value: 'carscom', label: 'Cars.com' },
+  { value: 'craigslist', label: 'Craigslist' },
 ];
 
 interface DesktopSidebarProps {
