@@ -111,7 +111,7 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
         <h3 className="font-semibold text-foreground text-sm leading-tight line-clamp-2 mb-1.5">
           {listing.title}
         </h3>
-        
+
         <div className="flex items-center gap-2 text-[11px] text-muted-foreground mb-2">
           <span className="flex items-center gap-0.5">
             <MapPin className="h-3 w-3" />
