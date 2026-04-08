@@ -18,4 +18,5 @@ export interface Listing {
   originalUrl: string;
   dealGrade: DealGrade | null;
   transmission?: Transmission;
+  foundAt?: string;
 }

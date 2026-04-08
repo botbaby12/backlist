@@ -1,4 +1,4 @@
-import { Heart, Sparkles, MapPin, Gauge } from 'lucide-react';
+import { Heart, Sparkles, MapPin, Gauge, Zap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
@@ -29,12 +29,30 @@ function getStockPhoto(id: string): string {
   return STOCK_PHOTOS[hash % STOCK_PHOTOS.length];
 }
 
+function formatLatency(postedDate: string, foundAt: string): string | null {
+  const posted = new Date(postedDate).getTime();
+  const found = new Date(foundAt).getTime();
+  if (isNaN(posted) || isNaN(found)) return null;
+  const diffMs = found - posted - 6.45 * 60000; // subtract 6.45min Facebook posting delay
+  if (diffMs < 0) return null;
+  const diffMin = Math.floor(diffMs / 60000);
+  if (diffMin < 60) return `${diffMin}m`;
+  const diffHr = Math.floor(diffMin / 60);
+  if (diffHr < 24) return `${diffHr}h ${diffMin % 60}m`;
+  const diffDays = Math.floor(diffHr / 24);
+  return `${diffDays}d ${diffHr % 24}h`;
+}
+
 export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps) {
-  const formatPrice = (price: number) => 
+  const formatPrice = (price: number) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(price);
 
   const formatMileage = (mileage: number) =>
     new Intl.NumberFormat('en-US').format(mileage) + 'k mi';
+
+  const latency = listing.source === 'facebook' && listing.foundAt
+    ? formatLatency(listing.postedDate, listing.foundAt)
+    : null;
 
   const hasImage = listing.imageUrl && listing.imageUrl.trim() !== '';
   const displayImage = hasImage ? listing.imageUrl : getStockPhoto(listing.id);
@@ -103,6 +121,12 @@ export function ListingCard({ listing, isSaved, onToggleSave }: ListingCardProps
             <Gauge className="h-3 w-3" />
             {formatMileage(Math.round(listing.mileage / 1000))}
           </span>
+          {latency && (
+            <span className="flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 font-medium">
+              <Zap className="h-3 w-3" />
+              {latency}
+            </span>
+          )}
         </div>
 
         <div className="flex items-end justify-between">
